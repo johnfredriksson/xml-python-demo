@@ -7,15 +7,15 @@ target_child = 'target'
 
 DOM = ElementTree.parse(input_file)
 
-for child in DOM.getroot().iter():
+for element in DOM.getroot().iter():
     try:
-        if child.attrib['id'] == target_id:
+        if element.attrib['id'] == target_id:
             try:
-                output_text = child.find(target_child).text
+                output_text = element.find(target_child).text
                 with open(output_file_name, 'w') as output_file:
                     output_file.write(output_text)
                 break
             except AttributeError:
-                print(f"AttributeError: element '{child.tag}' has no child '{target_child}'")
+                print(f"AttributeError: element '{element.tag}' has no child '{target_child}'")
     except KeyError:
         continue
